@@ -1,9 +1,12 @@
 package br.com.fiap.spring.mvc.controller;
 
 import br.com.fiap.spring.mvc.entity.Livro;
+import br.com.fiap.spring.mvc.service.LivroService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -11,21 +14,27 @@ import java.util.List;
 @Controller
 @RequestMapping("/livros")
 public class LivroController {
+
+    @Autowired
+    LivroService livroService;
+
     @GetMapping("/lista")
     public String listarLivros(Model model) {
-        Livro livro1 = new Livro();
-        Livro livro2 = new Livro();
-        Livro livro3 = new Livro();
-        livro1.setTitulo("Livro 1");
-        livro2.setTitulo("Livro 2");
-        livro3.setTitulo("Livro 3");
-        livro1.setId((long) 1);
-        livro2.setId((long) 2);
-        livro3.setId((long) 3);
-
-        List<Livro> livros = List.of(livro1, livro2, livro3);
+        List<Livro> livros = livroService.readLivros();
         model.addAttribute("listaLivros", livros);
 
         return "livroLista";
+    }
+
+    @GetMapping("/cadastro")
+    public String cadastroLivro(Model model){
+        model.addAttribute("livro", new Livro());
+        return "livroCadastro";
+    }
+
+    @PostMapping("/cadastrar")
+    public String cadastrarLivro(Livro livro, Model model){
+        livroService.createLivro(livro);
+        return listarLivros(model);
     }
 }
