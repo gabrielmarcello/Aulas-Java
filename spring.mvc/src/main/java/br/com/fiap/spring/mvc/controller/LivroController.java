@@ -1,14 +1,19 @@
 package br.com.fiap.spring.mvc.controller;
 
+import br.com.fiap.spring.mvc.entity.Categoria;
 import br.com.fiap.spring.mvc.entity.Livro;
 import br.com.fiap.spring.mvc.service.LivroService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.bind.BindResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -33,7 +38,12 @@ public class LivroController {
     }
 
     @PostMapping("/cadastrar")
-    public String cadastrarLivro(Livro livro, Model model){
+    public String cadastrarLivro(@Valid Livro livro, BindingResult result, Model model){
+        if(result.hasErrors()){
+            model.addAttribute("livro", livro);
+            model.addAttribute("categoriaLista", Arrays.asList(Categoria.values()));
+            return "livroCadastro";
+        }
         livroService.createLivro(livro);
         return listarLivros(model);
     }

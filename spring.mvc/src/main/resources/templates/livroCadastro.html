@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Cadastro de Livro</title>
+    <link th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" rel="stylesheet" />
+    <script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}" defer></script>
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
 </head>
 <body>
 <div th:include="~{fragments/header :: cabecalho}"></div>
@@ -12,9 +15,11 @@
         <br>
         <div>
             <label for="titulo">Titulo:</label><input type="text" id="titulo" th:field="*{titulo}">
+            <p th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}" th:errorclass="error"></p>
         </div>
         <div>
             <label for="autor">Autor:</label><input type="text" id="autor" th:field="*{autor}">
+            <p th:if="${#fields.hasErrors('autor')}" th:errors="*{autor}" th:errorclass="error"></p>
         </div>
         <div>
             <label for="categoria">Categoria:</label>
@@ -28,18 +33,24 @@
                 <option value="Biografia">Biografia</option>
                 <option value="Tecnologia">Tecnologia</option>
             </select>
+            <p th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}" th:errorclass="error"></p>
         </div>
         <div>
             <label for="editora">Editora:</label><input type="text" id="editora" th:field="*{editora}">
+            <p th:if="${#fields.hasErrors('editora')}" th:errors="*{editora}" th:errorclass="error"></p>
+
         </div>
         <div>
             <label for="preco">Preco:</label><input type="text" id="preco" th:field="*{preco}">
+            <p th:if="${#fields.hasErrors('preco')}" th:errors="*{preco}" th:errorclass="error"></p>
         </div>
         <div>
             <label for="isbn">Isbn:</label><input type="text" id="isbn" th:field="*{isbn}">
+            <p th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}" th:errorclass="error"></p>
         </div>
         <div>
             <label for="dataPublicacao">DataPublicacao:</label><input type="date" id="dataPublicacao" th:field="*{dataPublicacao}">
+            <p th:if="${#fields.hasErrors('dataPublicacao')}" th:errors="*{dataPublicacao}" th:errorclass="error"></p>
         </div>
         <div>
             <button type="submit">Cadastrar</button>
