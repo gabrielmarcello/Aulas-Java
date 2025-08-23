@@ -25,13 +25,13 @@
             <label for="categoria">Categoria:</label>
             <select id="categoria" th:field="*{categoria}">
                 <option value="TERROR">Terror</option>
-                <option value="Romance">Romance</option>
-                <option value="Comédia">Comédia</option>
-                <option value="Ficção">Ficção</option>
-                <option value="Suspense">Suspense</option>
-                <option value="Fantasia">Fantasia</option>
-                <option value="Biografia">Biografia</option>
-                <option value="Tecnologia">Tecnologia</option>
+                <option value="ROMANCE">Romance</option>
+                <option value="COMEDIA">Comédia</option>
+                <option value="FICCAO">Ficção</option>
+                <option value="SUSPENSE">Suspense</option>
+                <option value="FANTASIA">Fantasia</option>
+                <option value="BIOGRAFIA">Biografia</option>
+                <option value="TECNOLOGIA">Tecnologia</option>
             </select>
             <p th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}" th:errorclass="error"></p>
         </div>
