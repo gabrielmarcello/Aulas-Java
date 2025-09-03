@@ -12,6 +12,7 @@
 <div>
     <form method="post" th:action="@{cadastrar}" th:object="${livro}">
         <h2>Cadastro de Livro</h2>
+        <input type="hidden" th:field="*{id}">
         <br>
         <div>
             <label for="titulo">Titulo:</label><input type="text" id="titulo" th:field="*{titulo}">
